@@ -1,0 +1,28 @@
+<div>
+  <label>Event name:
+    <input #eventName />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(eventName.value); eventName.value=''">
+    add
+  </button>
+  <ul class="eventos">
+    <li *ngFor="let evento of eventos" [class.selected]="evento === selectedEvent" (click)="onSelect(evento)">
+      <span class="badge">{{evento.id}}</span> {{evento.name}}
+      <button class="delete" title="delete evento" (click)="delete(evento)">x</button>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="selectedEvent">
+
+  <h2>{{ selectedEvent.name | uppercase }} Details</h2>
+  <div>
+    <span>id: </span>{{selectedEvent.id}}</div>
+  <div>
+    <label>name:
+       <input type="text" [(ngModel)]="selectedEvent.name" placeholder="name">
+    </label>
+  </div>
+
+</div>
